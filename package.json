@@ -1,0 +1,31 @@
+{
+  "name": "recetas-api",
+  "version": "1.0.0",
+  "description": "Recetas de la casa Kunze Claassen",
+  "main": "app.js",
+  "engines": {
+    "node": "12.13.1",
+    "npm": "6.12.1"
+  },
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "npm install",
+    "start-prod": "pm2 start app.js",
+    "build-js": "browserify ./frontend/js/main.js -o ./frontend/js/utils/build/main.js -dv"
+  },
+  "author": "Vaiti",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "browserify": "^16.5.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.0.2",
+    "nodemon": "^2.0.2",
+    "pm2": "^4.4.0",
+    "sequelize": "^5.21.2"
+  },
+  "devDependencies": {}
+}
