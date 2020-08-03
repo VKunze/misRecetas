@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '5mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
-db.sequelize.sync();
+// db.sequelize.sync();
 app.use(ruter);
 
 const PORT = process.env.PORT || 8080;
