@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Site Metas -->
+	<title>Mis recetas!</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="author" content="VKunze">
+
+	<!-- Site Icons -->
+	<link rel="shortcut icon" href="utils/images/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="utils/images/apple-touch-icon.png">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="css/responsive.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+	<div class="all-page-title page-breadcrumb" id="top">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>Recetas :)</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Start Menu -->
+	<div class="menu-box" id="contenedorListaRecetas">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="special-menu text-center">
+						<div class="button-group filter-button-group">
+							<button class="active" data-filter="*">All</button>
+							<button data-filter=".salado">Salado</button>
+							<button data-filter=".dulce">Dulce</button>
+							<button data-filter=".postres">Postres</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="listaRecetas"></div> <!-- special-list -->
+		</div>
+	</div>
+	<!-- End Menu -->
+
+	<!-- Receta especifica -->
+	<div id="recetaEspecifica" style="display: none;">
+		<button class="botonAtras" onclick="atras()">Atrás</button>
+		<div class="blog-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="heading-title text-center">
+							<h2 id="titulo"></h2>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="blog-inner-details-page">
+							<div class="blog-inner-box">
+								<div class="side-blog-img elemRecetaEspecifica" id="imagenRecetaEspecifica">
+									<img class="img-fluid" src="" width="100%" alt="">
+								</div>
+								<div class="inner-blog-detail details-page">
+									<ul style="margin-bottom: 15px; float:right;">
+										<li id="hayAutorRecetaEspecifica"><i class="zmdi zmdi-account"></i>Obtenida de :
+											<span class="elemRecetaEspecifica" id="autorRecetaEspecifica"></span></li>
+									</ul>
+									<h3 style="margin-top: 30px;">Ingredientes:</h3>
+									<span class="elemRecetaEspecifica" id="ingredientesRecetaEspecifica"></span>
+									<blockquote>
+										<p class="elemRecetaEspecifica" id="descripcionRecetaEspecifica"></p>
+									</blockquote>
+									<!-- <p class="elemRecetaEspecifica" id="parrafoFinalRecetaEspecifica"></p> -->
+								</div>
+							</div>
+							<div class="blog-comment-box">
+								<h3>Comentarios</h3>
+								<div id=comentariosRecetaEspecifica></div>
+								<div id=agregarComentarioRecetaEspecifica style='display: none;'>
+									<div><label for="autor" class="labelAgregar">Nombre:</label>
+										<input class="inputLindo" name="autorComentario" id="autorComentario">
+									</div>
+									<div><label for="Comentario" class="labelAgregar"
+											style="vertical-align: top;">Comentario:</label>
+										<textarea class="inputLindo" name="contenido" type="text" cols="40" rows="2"
+											id="contenidoComentario"></textarea>
+									</div>
+								</div>
+								<a id='btnComentarios' name='agregar' class="right-btn-re" onClick='agregarComentario(this.name)'><i class="fa fa-reply"
+										aria-hidden="true"></i>
+									Agregar comentario</a>
+							</div>
+						</div>
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Receta especifica -->
+
+	<!-- Agregar receta -->
+	<div id="agregarReceta" class="agregarRecetaContenedor" style="display: none;">
+		<button class="botonAtras" onclick="atras()">Atrás</button>
+		<div class="blog-box" style="display:block; width: fit-content; margin: auto;">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="blog-inner-details-page">
+							<div class="blog-inner-box">
+								<div style="margin-bottom: 20px;"><label for="titulo"
+										class="labelAgregar">Título:</label>
+									<input class="inputLindo" name="tituloNuevaReceta" id="tituloNuevaReceta"></div>
+								<div><label for="autor" class="labelAgregar">Autor:</label>
+									<input class="inputLindo" name="autorNuevaReceta" id="autorNuevaReceta"></div>
+								<div>
+									<label for="tipo" class="labelAgregar">Tipo de comida:</label>
+									<select class="select" name="tipo" id="tipoComida">
+										<option value=""></option>
+										<option value="salado">Salado</option>
+										<option value="dulce">Dulce</option>
+										<option value="postres">Postres</option>
+									</select>
+								</div>
+								<!-- <div><label for="imagen" class="labelAgregar">Nombre imágen (sin tipo):</label>
+									<input name="imagen" id="imagenNuevaReceta"></div> -->
+								<div><label for="Ingrediente" class="labelAgregar">Ingredientes*:</label>
+									<input class="inputLindo" name="ingredientes" id="ingredientesNuevaReceta">
+									<!-- <span id=masIngredientes></span>
+									<a type="button" onclick="agregarIngrediente()">
+										<i class="fas fa-plus" style="margin-left: 10px;"></i>
+									</a> -->
+								</div>
+								<div><label for="Descripción" class="labelAgregar"
+										style="vertical-align: top;">Descripción:</label>
+									<textarea class="inputLindo" name="descripción" type="text" cols="40" rows="4"
+										id="descripciónNuevaReceta"></textarea>
+								</div>
+								<div>
+									<div class="inputLindo" id="imagenNuevaReceta" onclick="agregarImagen()">Arrastrar archivo o hacer click para buscar imagen :)</div>
+									<!--  accept="image/*" -->
+								</div>	
+
+								<!-- <div><label style="font-weight: 500;">Para cargar la imagen, ponerla en la carpeta
+										"imagenes" con el nombre de la receta de la siguiente forma:
+										"arrollados-de-primavera".</label></div> -->
+								<div><label style="font-weight: 500;">*separados por comas</label></div>
+								<button class="botonAtras" onclick="guardarNuevaReceta()">Guardar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End agregar receta -->
+
+	<!-- Start QT -->
+	<div id=quoteFinal class="qt-box qt-background">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 ml-auto mr-auto text-left">
+					<p class="lead ">
+						" If you're not the one cooking, stay out of the way and compliment the chef. "
+					</p>
+					<span class="lead">Michael Strahan</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End QT -->
+
+	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+	<!-- ALL JS FILES -->
+	<script src="js/utils/externo/jquery-3.2.1.min.js"></script>
+	<script src="js/utils/externo/popper.min.js"></script>
+	<script src="js/utils/externo/bootstrap.min.js"></script>
+	<!-- ALL PLUGINS -->
+	<script src="js/utils/externo/jquery.superslides.min.js"></script>
+	<script src="js/utils/externo/images-loded.min.js"></script>
+	<script src="js/utils/externo/isotope.min.js"></script>
+	<script src="js/utils/externo/baguetteBox.min.js"></script>
+	<script src="js/utils/externo/form-validator.min.js"></script>
+	<script src="js/utils/externo/contact-form-script.js"></script>
+	<script src="js/utils/externo/custom.js"></script>
+	<!-- <script src="https://kit.fontawesome.com/05bf5a1603.js" crossorigin="anonymous"></script> -->
+
+
+	<script src="js/recepciónEventos.js"></script>
+	<script src="js/utils/build/main.js"></script>
+	<!-- <script src="js/propio/principal.js"></script> -->
+</body>
+
+</html>
