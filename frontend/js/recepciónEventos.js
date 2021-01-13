@@ -19,8 +19,7 @@ function guardarNuevaReceta() {
 }
 
 function agregarImagen() {
-    console.log('llega a agregar 1');
-    var event = new CustomEvent('agregarImagen1');
+    var event = new CustomEvent('agregarImagen');
     document.dispatchEvent(event);
 }
 

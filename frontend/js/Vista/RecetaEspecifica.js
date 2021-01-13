@@ -13,7 +13,7 @@ exports.mostrarRecetaEspecifica = (datos) => {
     document.getElementById("titulo").innerHTML = datos.nombre;
     const nombreImg = datos.nombre.split(" ").join("-");
 
-    document.getElementById("imagenRecetaEspecifica").innerHTML = "<img class=\"img-fluid\" src=\"utils/imagenes/" + nombreImg + ".jpg\" width=\"100%\" alt=\"\">";
+    document.getElementById("imagenRecetaEspecifica").innerHTML = "<img class=\"img-fluid\" src=\"" + Uint8ToString(datos.imagen.data) + "\" width=\"100%\" alt=\"\">";
     for (key in datos) {
         //console.log(key);
         if (key != "tipoComida" && key != "createdAt" && key != "updatedAt" && key != "id" && key != "nombre") {
@@ -67,5 +67,13 @@ function addComment(comment) {
 }
 
 
+function Uint8ToString(u8a) {
+    var CHUNK_SZ = 0x8000;
+    var c = [];
+    for (var i = 0; i < u8a.length; i += CHUNK_SZ) {
+        c.push(String.fromCharCode.apply(null, u8a.slice(i, i + CHUNK_SZ)));
+    }
+    return c.join("");
+}
 
 

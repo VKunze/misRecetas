@@ -19,8 +19,8 @@ exports.escucharPorEventos = () => {
         receta.guardarNuevaReceta();
     })
 
-    document.addEventListener("agregarImagen1", async function () {
-        console.log('llega a agregar 2');
+    document.addEventListener("agregarImagen", async function () {
+        console.log('en manejo eventos')
         receta.agregarImagen();
     })
 

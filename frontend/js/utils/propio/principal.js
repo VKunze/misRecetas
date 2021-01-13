@@ -149,8 +149,7 @@ async function mandarABackend(tipoRequest, uri, params) {
         return JSON.parse(Http.responseText);
     } else {
         return "OK";
-    }
-    
+    }  
 }
 
 module.exports = {

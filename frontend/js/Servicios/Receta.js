@@ -24,7 +24,9 @@ exports.guardarNuevaReceta = () => {
     datos.tipoComida = document.getElementById("tipoComida").value;
     datos.ingredientes = document.getElementById("ingredientesNuevaReceta").value;
     datos.descripcion = document.getElementById("descripciónNuevaReceta").value;
-    datos.rutaImagen = "/" + datos.nombre.split(" ").join("-") + ".jpg";
+    datos.imagen = document.getElementById("previewImagen").src;
+    console.log('image', datos.imagen)
+    // "/" + datos.nombre.split(" ").join("-") + ".jpg";
 
     backend.guardarReceta(datos);
     vistaTransiciones.irAPagPrincipal();
@@ -32,17 +34,23 @@ exports.guardarNuevaReceta = () => {
 }
 
 var uploader = $('<input type="file" accept="image/*" />')
-    
+
 exports.agregarImagen = () => {
-    console.log('llega 3', uploader)
     uploader.click()
 
-    uploader.on('change', function(){
-        var reader = new FileReader()
-        var campo = $('#imagenNuevaReceta')
-        reader.onload = function(event) {
-            campo.after('<div class="img" style="background-image: url(\'' + event.target.result + '\');" rel="'+ event.target.result  +'"><span>remove</span></div>')
-        }
-        reader.readAsDataURL($('#imagenNuevaReceta')[0].files[0])    
+    uploader.on('change', function () {
+        readUrl(this)
     })
+}
+
+var readUrl = (input) => {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function (e) {
+            $('#previewImagen').attr('src', e.target.result);
+        }, false);
+
+        reader.readAsDataURL(input.files[0])
+    }
 }
