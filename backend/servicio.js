@@ -55,7 +55,7 @@ exports.obtenerReceta = async (nombreReceta) => {
 };
 
 exports.obtenerComentarios = async (idReceta) => {
-    return Comentarios.findAll({ where: { recetumId: idReceta }})
+    return Comentarios.findAll({ where: { recetumId: idReceta } })
         .then(data => {
             return data;
         })
@@ -63,3 +63,13 @@ exports.obtenerComentarios = async (idReceta) => {
             throw err;
         });
 };
+
+exports.eliminarReceta = async (nombreReceta) => {
+    return Receta.destroy({ where: { nombre: nombreReceta }, include: [{ model: Comentarios }] })
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            throw err;
+        });
+}

@@ -79,3 +79,20 @@ exports.obtenerRecetaEspecifica = async (req, res) => {
         });
     }
 }
+
+exports.eliminarReceta = async (req, res) => {
+    try {
+        const nombreReceta = req.body.nombreReceta;
+        const respuesta = await servicio.eliminarReceta(nombreReceta);
+        res.status(200).send({
+            success: true,
+            datos: respuesta
+        });
+    } catch (e) {
+        res.status(500).send({
+            success: false,
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Ha ocurrido un error inesperado, intente de nuevo mas tarde!'
+        });
+    }
+}

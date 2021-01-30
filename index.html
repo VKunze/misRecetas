@@ -49,17 +49,26 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="special-menu text-center">
-						<div class="button-group filter-button-group">
-							<button class="active" data-filter="*">All</button>
-							<button data-filter=".salado">Salado</button>
-							<button data-filter=".dulce">Dulce</button>
-							<button data-filter=".postres">Postres</button>
-						</div>
+					<div class="filtros-recetas text-center">
+						<p class="filtro-tipo-comida button-group filter-button-group">
+							<button class="boton-filtro-tipo-comida active" data-filter="*">All</button>
+							<button class="boton-filtro-tipo-comida" data-filter=".salado">Salado</button>
+							<button class="boton-filtro-tipo-comida" data-filter=".dulce">Dulce</button>
+						</p>
+						<p data-filter="filtrarPorNombreReceta"
+							class="filtro-nombre-receta button-group filter-button-group">
+							<input type="text" class="input-filtro" id="inputFiltroNombreReceta"
+								placeholder="Nombre de receta">
+						</p>
+						<p data-filter="filtrarPorNombreAutor"
+						class="filtro-nombre-autor button-group filter-button-group">
+						<input type="text" class="input-filtro" id="inputFiltroNombreAutor"
+							placeholder="Nombre del autor">
+					</p>
 					</div>
 				</div>
 			</div>
-			<div class="row" id="listaRecetas"></div> <!-- special-list -->
+			<div class="row listaRecetas" id="listaRecetas"></div> <!--  -->
 		</div>
 	</div>
 	<!-- End Menu -->
@@ -86,7 +95,8 @@
 								<div class="inner-blog-detail details-page">
 									<ul style="margin-bottom: 15px; float:right;">
 										<li id="hayAutorRecetaEspecifica"><i class="zmdi zmdi-account"></i>Obtenida de :
-											<span class="elemRecetaEspecifica" id="autorRecetaEspecifica"></span></li>
+											<span class="elemRecetaEspecifica" id="autorRecetaEspecifica"></span>
+										</li>
 									</ul>
 									<h3 style="margin-top: 30px;">Ingredientes:</h3>
 									<span class="elemRecetaEspecifica" id="ingredientesRecetaEspecifica"></span>
@@ -109,12 +119,13 @@
 											id="contenidoComentario"></textarea>
 									</div>
 								</div>
-								<a id='btnComentarios' name='agregar' class="right-btn-re" onClick='agregarComentario(this.name)'><i class="fa fa-reply"
+								<a id='btnComentarios' name='agregar' class="right-btn-re"
+									onClick='agregarComentario(this.name)'><i class="fa fa-reply"
 										aria-hidden="true"></i>
 									Agregar comentario</a>
 							</div>
 						</div>
-						
+
 
 					</div>
 				</div>
@@ -134,9 +145,11 @@
 							<div class="blog-inner-box">
 								<div style="margin-bottom: 20px;"><label for="titulo"
 										class="labelAgregar">Título:</label>
-									<input class="inputLindo" name="tituloNuevaReceta" id="tituloNuevaReceta"></div>
+									<input class="inputLindo" name="tituloNuevaReceta" id="tituloNuevaReceta">
+								</div>
 								<div><label for="autor" class="labelAgregar">Autor:</label>
-									<input class="inputLindo" name="autorNuevaReceta" id="autorNuevaReceta"></div>
+									<input class="inputLindo" name="autorNuevaReceta" id="autorNuevaReceta">
+								</div>
 								<div>
 									<label for="tipo" class="labelAgregar">Tipo de comida:</label>
 									<select class="select" name="tipo" id="tipoComida">
@@ -161,8 +174,11 @@
 										id="descripciónNuevaReceta"></textarea>
 								</div>
 								<div>
-									 <div class="inputLindo" id="imagenNuevaReceta" onclick="agregarImagen()" style="max-width: 600px;"><img id="previewImagen" src="" alt="Arrastrar archivo o hacer click para buscar imagen :)" style="width: 100%;"/></div>
-								</div>	
+									<div class="inputLindo" id="imagenNuevaReceta" onclick="agregarImagen()"
+										style="max-width: 600px;"><img id="previewImagen" src=""
+											alt="Arrastrar archivo o hacer click para buscar imagen :)"
+											style="width: 100%;" /></div>
+								</div>
 
 								<!-- <div><label style="font-weight: 500;">Para cargar la imagen, ponerla en la carpeta
 										"imagenes" con el nombre de la receta de la siguiente forma:
@@ -207,12 +223,11 @@
 	<script src="frontend/js/utils/externo/form-validator.min.js"></script>
 	<script src="frontend/js/utils/externo/contact-form-script.js"></script>
 	<script src="frontend/js/utils/externo/custom.js"></script>
-	<!-- <script src="https://kit.fontawesome.com/05bf5a1603.js" crossorigin="anonymous"></script> -->
 
 
+	<script src="frontend/js/Servicios/Filtros.js"></script>
 	<script src="frontend/js/recepciónEventos.js"></script>
 	<script src="frontend/js/utils/build/main.js"></script>
-	<!-- <script src="frontend/js/propio/principal.js"></script> -->
 </body>
 
 </html>

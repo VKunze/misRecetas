@@ -8,4 +8,6 @@ router.post("/obtenerRecetaEspecifica", controlador.obtenerRecetaEspecifica);
 router.post('/guardarComentario', controlador.guardarComentario);
 router.post('/obtenerComentarios', controlador.obtenerComentarios);
 
+router.post('/eliminarReceta', controlador.eliminarReceta)
+
 module.exports = router;

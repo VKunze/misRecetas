@@ -11,7 +11,6 @@ exports.mostrarRecetaEspecifica = (datos) => {
 
     //set titulo
     document.getElementById("titulo").innerHTML = datos.nombre;
-    const nombreImg = datos.nombre.split(" ").join("-");
 
     document.getElementById("imagenRecetaEspecifica").innerHTML = "<img class=\"img-fluid\" src=\"" + Uint8ToString(datos.imagen.data) + "\" width=\"100%\" alt=\"\">";
     for (key in datos) {

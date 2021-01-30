@@ -13,3 +13,7 @@ Para mostrar las recetas, se lista todas y carga en memoria y ahi se pueden apli
 
 
 Los comentarios tambien estan en el mismo json de cada receta.
+
+
+## Como hacer el deploy a Heroku
+primero tener Heroku instalado
