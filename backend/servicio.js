@@ -3,34 +3,47 @@ const db = require("./db/index.js");
 const Receta = db.receta;
 const Comentarios = db.comentario;
 
+/**
+ * 
+ * @param {dictionary}  datos   Ejemplo: 
+ *                              {
+ *                                  nombre: receta1,
+ *                                  tipoComida: salado,
+ *                                  autor: vaiti,
+ *                                  descripcion: para hacer esta receta, haga X,
+ *                                  rutaImagen: unaRuta,
+ *                                  ingredientes: [{propsIng1}, {propsIng2}, {propsIng3}]    
+ *                              }
+ */
 exports.guardar = async (datos) => {
-    //datos.rutaImagen = "../frontend/utils/imagenes/" + datos.rutaImagen;
     try {
         datos.imagen = fs.readFileSync(datos.rutaImagen);
     } catch (err) {
         console.log(err);
     }
     delete datos.rutaImagen;
-    return Receta.create(datos)
-        .then(data => {
-            return (data);
-        })
+
+    var ingredientes = datos.ingredientes
+    delete datos.ingredientes;
+
+    var receta = await Receta.create(datos)
         .catch(e => {
             throw e;
         });
+    for (const ingrediente in ingredientes) {
+        await receta.createIngrediente(ingrediente)
+    }
+    return receta
 }
 
 
 exports.guardarComentario = async (datos) => {
-    datos.recetumId = datos.idRecetaActual;
-    delete datos.idRecetaActual;
-    console.log(datos);
-    return Comentarios.create(datos)
+    var receta = await obtenerReceta(datos.nombreReceta);
+    return receta.createComentario(datos.comentario)
         .then(data => {
-            return (data);
-        })
-        .catch(e => {
-            throw e;
+            return data;
+        }).catch(err => {
+            throw err;
         });
 }
 
@@ -44,9 +57,10 @@ exports.obtenerTodas = () => {
 }
 
 exports.obtenerReceta = async (nombreReceta) => {
-    return Receta.findOne({ where: { nombre: nombreReceta }, include: [{ model: Comentarios }] })
+    return Receta.findOne({ where: { nombre: nombreReceta }, include: [{ model: Comentarios }, { model: Ingredientes }] })
         .then(data => {
             data["comentarios"] = data.getComentarios();
+            data["ingredientes"] = data.getIngredientes();
             return data;
         })
         .catch(err => {

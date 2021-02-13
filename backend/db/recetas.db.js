@@ -9,9 +9,6 @@ module.exports = (sequelize, Sequelize) => {
       autor: {
         type: Sequelize.STRING
       },
-      ingredientes: {
-        type: Sequelize.STRING
-      },
       descripcion: {
         type: Sequelize.STRING
       },

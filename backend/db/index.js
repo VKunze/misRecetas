@@ -28,8 +28,12 @@ db.sequelize = sequelize;
 
 db.receta = require("./recetas.db.js")(sequelize, Sequelize);
 db.comentario = require("./comentarios.db.js")(sequelize, Sequelize);
+db.ingrediente = require("./ingredientes.db.js")(sequelize, Sequelize);
 
 db.receta.hasMany(db.comentario);
 db.comentario.belongsTo(db.receta);
+
+db.receta.hasMany(db.ingrediente);
+db.ingrediente.belongsTo(db.receta);
 
 module.exports = db;
