@@ -16,7 +16,6 @@ const Comentarios = db.comentario;
  *                              }
  */
 exports.guardar = async (datos) => {
-
     try {
         if (datos.rutaImagen) {
             datos.imagen = fs.readFileSync(datos.rutaImagen);
@@ -25,7 +24,7 @@ exports.guardar = async (datos) => {
         console.log(err);
     }
     delete datos.rutaImagen;
-
+    console.log("ingredientes pre assignment: ", datos.ingredientes)
     var ingredientes = datos.ingredientes
     delete datos.ingredientes;
 
@@ -33,7 +32,9 @@ exports.guardar = async (datos) => {
         .catch(e => {
             throw e;
         });
+    console.log("ingredientes: ", datos.ingredientes, ingredientes)
     for (const ingrediente in ingredientes) {
+        console.log("in for: ", ingrediente)
         await receta.createIngrediente(ingrediente)
     }
     return receta
