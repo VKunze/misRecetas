@@ -25,7 +25,6 @@ exports.guardar = async (datos) => {
         console.log(err);
     }
     delete datos.rutaImagen;
-    console.log("ingredientes pre assignment: ", datos.ingredientes)
     var ingredientes = datos.ingredientes
     delete datos.ingredientes;
 
@@ -33,17 +32,27 @@ exports.guardar = async (datos) => {
         .catch(e => {
             throw e;
         });
-    console.log("ingredientes: ", datos.ingredientes, ingredientes)
     for (const i in ingredientes) {
-        console.log("in for: ", ingredientes[i])
         await receta.createIngrediente(ingredientes[i])
     }
     return receta
 }
 
 
+/**
+ * 
+ * @param {dictionary}  datos   Ejemplo: 
+ *                              {
+ *                                  nombreReceta: receta1,
+ *                                  comentario: {
+ *                                      contenido: contenido,
+ *                                      autor: autor
+ *                                  }
+ *                              }
+ */
 exports.guardarComentario = async (datos) => {
-    var receta = await obtenerReceta(datos.nombreReceta);
+    var receta = await obtenerReceta(datos.nombreReceta); 
+    console.log("receta: ", receta, "comentario: ", datos.comentario)   
     return receta.createComentario(datos.comentario)
         .then(data => {
             return data;
