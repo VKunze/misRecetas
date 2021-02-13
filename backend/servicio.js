@@ -68,6 +68,7 @@ exports.obtenerReceta = async (nombreReceta) => {
             return data;
         })
         .catch(err => {
+            console.log("Error: ", err)
             throw err;
         });
 };
