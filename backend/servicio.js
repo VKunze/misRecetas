@@ -52,7 +52,13 @@ exports.guardar = async (datos) => {
  */
 exports.guardarComentario = async (datos) => {
     console.log("datos", datos, "nombre: ", datos.nombreReceta);
-    var receta = await Receta.findOne({ where: { nombre: nombreReceta }})
+    var receta = Receta.findOne({ where: { nombre: nombreReceta }}).then(data => {
+        return data;
+    })
+    .catch(err => {
+        console.log("Error: ", err)
+        throw err;
+    });
     //obtenerReceta(datos.nombreReceta); 
     console.log("receta: ", receta)
     console.log("comentario: ", datos.comentario)   
