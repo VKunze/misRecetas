@@ -2,6 +2,7 @@ const fs = require('fs');
 const db = require("./db/index.js");
 const Receta = db.receta;
 const Comentarios = db.comentario;
+const Ingredientes = db.ingrediente;
 
 /**
  * 
@@ -61,7 +62,7 @@ exports.obtenerTodas = () => {
 }
 
 exports.obtenerReceta = async (nombreReceta) => {
-    return Receta.findOne({ where: { nombre: nombreReceta }, include: [{ model: Ingredientes }] })
+    return Receta.findOne({ where: { nombre: nombreReceta }, include: [{ model: Comentarios }, { model: Ingredientes }] })
         .then(data => {
             data["comentarios"] = data.getComentarios();
             data["ingredientes"] = data.getIngredientes();
