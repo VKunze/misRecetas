@@ -52,7 +52,7 @@ exports.guardar = async (datos) => {
  */
 exports.guardarComentario = async (datos) => {
     console.log("datos", datos, "nombre: ", datos.nombreReceta);
-    var receta = await obtenerReceta(datos.nombreReceta); 
+    var receta = await this.obtenerReceta(datos.nombreReceta); 
     console.log("receta: ", receta)
     console.log("comentario: ", datos.comentario)   
     return receta.createComentario(datos.comentario)
