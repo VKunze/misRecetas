@@ -61,7 +61,7 @@ exports.obtenerTodas = () => {
 }
 
 exports.obtenerReceta = async (nombreReceta) => {
-    return Receta.findOne({ where: { nombre: nombreReceta }, include: [{ model: Comentarios }, { model: Ingredientes }] })
+    return Receta.findOne({ where: { nombre: nombreReceta }, include: [{ model: Ingredientes }] })
         .then(data => {
             data["comentarios"] = data.getComentarios();
             data["ingredientes"] = data.getIngredientes();
