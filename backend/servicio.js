@@ -16,8 +16,11 @@ const Comentarios = db.comentario;
  *                              }
  */
 exports.guardar = async (datos) => {
+
     try {
-        datos.imagen = fs.readFileSync(datos.rutaImagen);
+        if (datos.rutaImagen) {
+            datos.imagen = fs.readFileSync(datos.rutaImagen);
+        }
     } catch (err) {
         console.log(err);
     }
