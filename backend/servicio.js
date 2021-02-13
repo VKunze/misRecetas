@@ -52,14 +52,7 @@ exports.guardar = async (datos) => {
  */
 exports.guardarComentario = async (datos) => {
     console.log("datos", datos, "nombre: ", datos.nombreReceta);
-    var receta = Receta.findOne({ where: { nombre: nombreReceta }}).then(data => {
-        return data;
-    })
-    .catch(err => {
-        console.log("Error: ", err)
-        throw err;
-    });
-    //obtenerReceta(datos.nombreReceta); 
+    var receta = await obtenerReceta(datos.nombreReceta); 
     console.log("receta: ", receta)
     console.log("comentario: ", datos.comentario)   
     return receta.createComentario(datos.comentario)
@@ -80,10 +73,13 @@ exports.obtenerTodas = () => {
 }
 
 exports.obtenerReceta = async (nombreReceta) => {
+    console.log("obteniendo receta: ", nombreReceta)
     return Receta.findOne({ where: { nombre: nombreReceta }, include: [{ model: Comentarios }, { model: Ingredientes }] })
         .then(data => {
+            console.log("data: ", data)
             data["comentarios"] = data.getComentarios();
             data["ingredientes"] = data.getIngredientes();
+            console.log("Data 2 ", data)
             return data;
         })
         .catch(err => {
