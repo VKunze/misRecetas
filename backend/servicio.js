@@ -13,7 +13,7 @@ const Ingredientes = db.ingrediente;
  *                                  autor: vaiti,
  *                                  descripcion: para hacer esta receta, haga X,
  *                                  rutaImagen: unaRuta,
- *                                  ingredientes: [{propsIng1}, {propsIng2}, {propsIng3}]    
+ *                                  ingredientes: [{nombre: a, cantidad: 1, unidadDeMedida: taza}, {nombre: b, cantidad: 1, unidadDeMedida: taza}]    
  *                              }
  */
 exports.guardar = async (datos) => {
