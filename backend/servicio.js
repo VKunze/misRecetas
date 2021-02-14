@@ -61,8 +61,9 @@ exports.guardarComentario = async (datos) => {
 }
 
 exports.obtenerTodas = () => {
-    return Receta.findAll()
+    return Receta.findAll({include: [{ model: Ingredientes }] })
         .then(data => {
+            data["ingredientes"] = data.getIngredientes();
             return data;
         }).catch(err => {
             throw err;

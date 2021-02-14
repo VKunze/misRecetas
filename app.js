@@ -7,8 +7,8 @@ const http = require('http');
 var app = express();
 
 app.use(cors());
-app.use(bodyParser.json({ limit: '20mb', extended: true }));
-app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
+app.use(bodyParser.json({ limit: '5mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 app.use(express.json());
 
 // all environments
