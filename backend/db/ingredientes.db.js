@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize/types");
+const { Sequelize, DataTypes } = require('sequelize');
 
 module.exports = (sequelize, Sequelize) => {
   const Ingrediente = sequelize.define("ingrediente", {
@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     cantidad: {
-      type: Sequelize.DOUBLE
+      type: DataTypes.DOUBLE
     },
     unidadDeMedida: {
       type: Sequelize.STRING
