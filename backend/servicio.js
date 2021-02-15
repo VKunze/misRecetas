@@ -36,7 +36,9 @@ exports.guardar = async (datos) => {
     for (const i in ingredientes) {
         console.log("creando ingrediente: ", ingredientes[i])
         await receta.createIngrediente(ingredientes[i])
+        console.log("receta post crear ingrediente: ", receta)
     }
+    console.log("receta: ", receta)
     return receta
 }
 
