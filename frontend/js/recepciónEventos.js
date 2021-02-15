@@ -27,3 +27,9 @@ function agregarComentario(id) {
     var event = new CustomEvent('agregarComentario', { detail: id });
     document.dispatchEvent(event);
 }
+
+function agregarIngrediente(id) {
+    var event = new CustomEvent('agregarIngrediente', { detail: id });
+    document.dispatchEvent(event);
+}
+

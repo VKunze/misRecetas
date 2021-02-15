@@ -11,7 +11,6 @@ exports.mostrarRecetaEspecifica = () => {
 }
 
 exports.mostrarAgregarReceta = () => {
-    console.log(document.getElementById("agregarReceta"));
     document.getElementById("agregarReceta").style.display = "block";
     document.getElementById("contenedorListaRecetas").style.display = "none";
 }

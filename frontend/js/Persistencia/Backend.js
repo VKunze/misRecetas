@@ -6,7 +6,7 @@ exports.obtenerRecetas = async () => {
 }
 
 exports.obtenerRecetaEspecifica = async (id) => {
-    return mandarABackend("POST", "/obtenerRecetaEspecifica", '{"nombreReceta":"' + id + '"}', true).datos;
+    return mandarABackend("POST", "/obtenerRecetaEspecifica", '{"idReceta":"' + id + '"}', true).datos;
 }
 
 exports.guardarReceta = async (datos) => {
@@ -27,6 +27,8 @@ function mandarABackend(tipoRequest, uri, params, returnValue = false) {
     Http.open(tipoRequest, url + uri, false);
     if (params) {
         Http.setRequestHeader("Content-type", "application/json");
+        Http.setRequestHeader("cache", "false");
+        Http.setRequestHeader("processData", "false");
     }
 
     Http.send(params);

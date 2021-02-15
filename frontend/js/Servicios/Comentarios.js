@@ -3,19 +3,19 @@ const vistaRecetaEspecifica = require('../Vista/RecetaEspecifica');
 const backend = require('../Persistencia/Backend');
 
 exports.mostrarAgregarComentario = async (tipoEvento) => {
-    console.log(tipoEvento);
     if (tipoEvento == 'agregar') {
         vistaTransiciones.mostrarAgregarComentario();
     } else if (tipoEvento == 'guardar') {
         datos = {}
-        datos.idRecetaActual = vistaRecetaEspecifica.obtenerIdRecetaActual();
-        datos.contenido = document.getElementById('contenidoComentario').value;
-        datos.autor = document.getElementById('autorComentario').value;
-
+        datos.idReceta = vistaRecetaEspecifica.obtenerIdRecetaActual();
+        var comentario = {}
+        comentario.contenido = document.getElementById('contenidoComentario').value;
+        comentario.autor = document.getElementById('autorComentario').value;
+        datos.comentario = comentario
         await backend.guardarComentario(datos);
-
-        var comentarios = await backend.obtenerComentarios(datos.idRecetaActual);
-        console.log(comentarios);
+        console.log("post saving comment, id receta: ", datos.idReceta)
+        var comentarios = await backend.obtenerComentarios(datos.idReceta);
+        console.log("post getting them: ", comentarios)
         vistaRecetaEspecifica.actualizarComentarios(comentarios);
         vistaTransiciones.ocultarAgregarComentario();
     }

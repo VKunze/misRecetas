@@ -16,4 +16,4 @@ Los comentarios tambien estan en el mismo json de cada receta.
 
 
 ## Como hacer el deploy a Heroku
-primero tener Heroku instalado
+Hacer un push a la branch de herokuDeploymentBranch y listo!!

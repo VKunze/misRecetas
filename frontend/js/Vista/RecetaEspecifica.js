@@ -1,10 +1,9 @@
 var idRecetaActual = '';
 
 exports.mostrarRecetaEspecifica = (datos) => {
-    idRecetaActual = datos['id'];
+    idRecetaActual = datos.id;
     //Resetear todos los html
     var elementos = document.getElementsByClassName("elemRecetaEspecifica");
-    console.log(elementos);
     for (var i = 0; i < elementos.length; i++) {
         elementos[i].innerHTML = "";
     }
@@ -14,24 +13,21 @@ exports.mostrarRecetaEspecifica = (datos) => {
 
     document.getElementById("imagenRecetaEspecifica").innerHTML = "<img class=\"img-fluid\" src=\"" + Uint8ToString(datos.imagen.data) + "\" width=\"100%\" alt=\"\">";
     for (key in datos) {
-        //console.log(key);
         if (key != "tipoComida" && key != "createdAt" && key != "updatedAt" && key != "id" && key != "nombre") {
             if (key == "ingredientes") {
                 var html = "";
-                var ingredientes = datos[key].split(",");
+                var ingredientes = datos[key];
                 for (var i = 0; i < ingredientes.length; i++) {
-                    html += "<p class=\"elemRecetaEspecifica ingrediente\">- " + ingredientes[i] + "</p>";
+                    console.log(ingredientes[i])
+                    html += "<tr><td style=\"padding-right:15px;\">" + ingredientes[i].cantidad + " " + ingredientes[i].unidadDeMedida + "</td><td>" + ingredientes[i].nombre + "</td></tr>"
                 }
-                document.getElementById(key + "RecetaEspecifica").innerHTML = html;
+                document.getElementById("ingrRecetaEspecifica").innerHTML = html;
             } else if (key == "comentarios") {
                 this.actualizarComentarios(datos[key])
-            } else if(key == 'imagen'){
-                //document.getElementById(key + "RecetaEspecifica").innerHTML = datos[key];
-            
+            } else if (key == 'imagen') {
                 document.getElementById(key + "RecetaEspecifica").src = datos[key];
             } else {
-                //console.log(key, datos[key]);
-                document.getElementById(key + "RecetaEspecifica").innerHTML = datos[key];
+                document.getElementById(key + "RecetaEspecifica").innerHTML = datos[key].replaceAll("\n", "<br>");
             }
         }
     }
@@ -43,18 +39,18 @@ exports.obtenerIdRecetaActual = () => {
 
 exports.actualizarComentarios = (arrComentarios) => {
     if (arrComentarios.length == 0) {
-        document.getElementById(key + "RecetaEspecifica").innerHTML = "<p>Por ahora no hay comentarios para esta receta.</p>";
+        document.getElementById("comentariosRecetaEspecifica").innerHTML = "<p>Por ahora no hay comentarios para esta receta.</p>";
     } else {
-        document.getElementById(key + "RecetaEspecifica").innerHTML = '';
+        document.getElementById("comentariosRecetaEspecifica").innerHTML = '';
         for (var i = 0; i < arrComentarios.length; i++) {
-            document.getElementById(key + "RecetaEspecifica").innerHTML += addComment(arrComentarios[i]);
+            document.getElementById("comentariosRecetaEspecifica").innerHTML += addComment(arrComentarios[i]);
         }
     }
 }
 
 
 function addComment(comment) {
-    const fecha = comment['createdAt'] ? comment['createdAt'].slice(0,10): '';
+    const fecha = comment['createdAt'] ? comment['createdAt'].slice(0, 10) : '';
     return "<div class=\"comment-item\">" +
         "<div class=\"pull-left\">" +
         "<a>" + comment['autor'] + "</a></div>" +

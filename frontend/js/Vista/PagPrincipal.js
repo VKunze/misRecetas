@@ -3,16 +3,18 @@ const { agregarImagen } = require("../Servicios/Receta");
 
 exports.listarRecetas = (recetas) => {
     var html = "";
+    console.lo
     for (var i = 0; i < recetas.length; i++) {
-        var nombreImg = recetas[i].nombre.split(" ").join("-");
-        console.log(recetas[i], recetas[i].imagen)
+        var nombresIngredientes = [];
+        recetas[i].ingredientes.forEach(ingrediente => nombresIngredientes.push(ingrediente.nombre))
         html += "<div id=\"" + recetas[i].id + "\" class=\"col-lg-4 col-md-6 elemento-grid-recetas " + recetas[i].tipoComida + "\" style=\"width=247px\">" +
             "<div class=\"gallery-single fix\">" +
             agregarImagencita(recetas[i]) +
             "<div class=\"why-text\">" +
             "<h4 class=nombreReceta>" + recetas[i].nombre + "</h4>" +
-            "<p style=\"display:none;\" class=nombreAutor>" + recetas[i].autor + "</p>"+
-        "<a class=\"btn-lg btn-circle btn-outline-new-white\" id=\"" + nombreImg + "\" onclick=\"mostrarReceta(this.id)\" style=\"color:white;\">Ver receta</a>" +
+            "<p style=\"display:none;\" class=nombreAutor>" + recetas[i].autor + "</p>" +
+            "<p style=\"display:none;\" class=nombresIngredientes>" + nombresIngredientes.join(",") + "</p>" +
+            "<a class=\"btn-lg btn-circle btn-outline-new-white\" id=\"" + recetas[i].id + "\" onclick=\"mostrarReceta(this.id)\" style=\"color:white;\">Ver receta</a>" +
             "</div>" +
             "</div>" +
             "</div>";

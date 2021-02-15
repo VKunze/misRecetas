@@ -36,7 +36,6 @@ async function mostrarReceta(id) {
     document.getElementById("recetaEspecifica").style.display = "block";
     //Resetear todos los html
     var elementos = document.getElementsByClassName("elemRecetaEspecifica");
-    console.log(elementos);
     for (var i = 0; i < elementos.length; i++) {
         elementos[i].innerHTML = "";
     }
@@ -44,14 +43,12 @@ async function mostrarReceta(id) {
     //conseguir datos
     var respuesta = await mandarABackend("POST", "/obtenerRecetaEspecifica", id.split("-").join(" "));
     var datos = respuesta.datos;
-    console.log(datos);
     //set titulo
     document.getElementById("titulo").innerHTML = datos.nombre;
     const nombreImg = datos.nombre.split(" ").join("-");
 
     document.getElementById("imagenRecetaEspecifica").innerHTML = "<img class=\"img-fluid\" src=\"utils/imagenes/" + nombreImg + ".jpg\" width=\"100%\" alt=\"\">";
     for (key in datos) {
-        //console.log(key);
         if (key != "tipoComida" && key != "createdAt" && key != "updatedAt" && key != "id" && key != "nombre") {
             if (key == "ingredientes") {
                 var html = "";
@@ -61,7 +58,6 @@ async function mostrarReceta(id) {
                 }
                 document.getElementById(key + "RecetaEspecifica").innerHTML = html;
             } else {
-                console.log(key);
                 document.getElementById(key + "RecetaEspecifica").innerHTML = datos[key];
             }
         }
@@ -124,8 +120,6 @@ const url = 'http://localhost:8080';
 
 async function mandarABackend(tipoRequest, uri, params) {
     Http.open(tipoRequest, url + uri, false);
-    console.log(params);
-    console.log(url+uri);
     if (params) {
         Http.setRequestHeader("Content-type", "application/json");
         if (uri == "/obtenerRecetaEspecifica") {
@@ -135,12 +129,6 @@ async function mandarABackend(tipoRequest, uri, params) {
 
     Http.send(params);
 
-    /* Http.onreadystatechange = (e) => {
-        console.log(Http.responseText);
-        recetas = Http.responseText;
-        return Http.responseText;
-    } */
-    //console.log(JSON.parse(Http.responseText));
     if(uri != "/guardarReceta"){
         return JSON.parse(Http.responseText);
     } else {

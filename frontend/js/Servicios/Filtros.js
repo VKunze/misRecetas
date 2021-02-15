@@ -3,8 +3,9 @@ var Container = $('.container');
 Container.imagesLoaded(function () {
     var filtroTipoComida = $('.filtro-tipo-comida');
     var filtroNombreReceta = $('#inputFiltroNombreReceta');
-var filtroNombreAutor = $('#inputFiltroNombreAutor');
-    
+    var filtroNombreAutor = $('#inputFiltroNombreAutor');
+    var filtroIngrediente = $('#inputFiltroIngrediente');
+
     filtroTipoComida.on('click', 'button', function () {
         $(this).addClass('active').siblings().removeClass('active');
         filtrar();
@@ -14,28 +15,37 @@ var filtroNombreAutor = $('#inputFiltroNombreAutor');
         filtrarPorNombreReceta()
         filtrar()
     })
+
     filtroNombreAutor.on('keyup', function () {
         filtrarPorNombreAutor()
         filtrar()
     })
+
+    filtroIngrediente.on('keyup', function () {
+        filtrarPorIngrediente()
+        filtrar()
+    })
+
 });
 
 
 function filtrar() {
     var filterValues = [];
 
-    var tipoComidaFilterValue = obtenerValorFiltroComida();
+    var tipoComidaFilterValue = obtenerValorFiltroTipoComida();
     if (tipoComidaFilterValue && tipoComidaFilterValue != "*") {
         filterValues.push(tipoComidaFilterValue);
     }
-    console.log(tipoComidaFilterValue, filterValues)
     if (document.getElementById('inputFiltroNombreReceta').value != "") {
         filterValues.push(".nombreRecetaFiltroOk");
     }
     if (document.getElementById('inputFiltroNombreAutor').value != "") {
         filterValues.push(".nombreAutorFiltroOk");
     }
-    
+    if (document.getElementById('inputFiltroIngrediente').value != "") {
+        filterValues.push(".ingredienteFiltroOk");
+    }
+
     agregarClasesASiempreVisibles(filterValues);
     $('.listaRecetas').isotope({
         itemSelector: '.elemento-grid-recetas',
@@ -44,7 +54,7 @@ function filtrar() {
 
 }
 
-function obtenerValorFiltroComida(){
+function obtenerValorFiltroTipoComida() {
     var docsTiposComida = document.getElementsByClassName('boton-filtro-tipo-comida');
     var tipoComidaFilterValue = ''
     for (var i = 0; i < docsTiposComida.length; i++) {
@@ -99,16 +109,45 @@ function filtrarPorNombreAutor() {
     }
 }
 
-function obtenerNombreReceta(elemento){
+function filtrarPorIngrediente() {
+    var filter = document.getElementById('inputFiltroIngrediente').value.toLowerCase();
+    var grid = document.getElementById('listaRecetas');
+    var listaElementos = grid.getElementsByClassName('elemento-grid-recetas');
+    console.log("listaElementos", listaElementos, listaElementos.length)
+    for (var i = 0; i < listaElementos.length; i++) {
+        console.log("elemento: ", listaElementos[i].id)
+        if (listaElementos[i].id != "elementoAgregarReceta") {
+            ingredientesReceta = obtenerIngredientes(listaElementos[i]);
+            console.log("ingredientesReceta", ingredientesReceta)
+
+            listaElementos[i].classList.remove('ingredienteFiltroOk');
+            for (var j = 0; j < ingredientesReceta.length; j++) {
+                if (ingredientesReceta[j].toLowerCase().indexOf(filter) > -1) {
+                    listaElementos[i].classList.add('ingredienteFiltroOk');
+                }
+            }
+            console.log("termino ejecucion")
+        }
+        console.log("termino ejecucion final, i: ", i)
+    }
+}
+
+function obtenerNombreReceta(elemento) {
     var a = elemento.getElementsByClassName("nombreReceta")[0];
     var nombreReceta = a.textContent || a.innerText;
     return nombreReceta;
 }
 
-function obtenerAutor(elemento){
+function obtenerAutor(elemento) {
     var a = elemento.getElementsByClassName("nombreAutor")[0];
     var nombreAutor = a.textContent || a.innerText;
     return nombreAutor;
+}
+
+function obtenerIngredientes(elemento) {
+    var a = elemento.getElementsByClassName("nombresIngredientes")[0];
+    var ingredientes = a.textContent || a.innerText;
+    return ingredientes.split(",");
 }
 
 function concatValues(obj) {

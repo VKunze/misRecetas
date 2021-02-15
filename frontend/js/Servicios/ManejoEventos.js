@@ -20,7 +20,6 @@ exports.escucharPorEventos = () => {
     })
 
     document.addEventListener("agregarImagen", async function () {
-        console.log('en manejo eventos')
         receta.agregarImagen();
     })
 
@@ -29,8 +28,10 @@ exports.escucharPorEventos = () => {
     });
 
     document.addEventListener("agregarComentario", async function (id) {
-        console.log(id);
         comentarios.mostrarAgregarComentario(id.detail);
     });
 
+    document.addEventListener("agregarIngrediente", async function (id) {
+        receta.mostrarAgregarIngrediente(id.detail);
+    });
 }

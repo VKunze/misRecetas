@@ -1038,7 +1038,7 @@ button:focus{
     padding-bottom: 15px;
 }
 .inner-blog-detail ul li {
-    display: inline-block;
+    display: block;
     padding: 0px 5px;
     color: #222222;
 }
@@ -1376,7 +1376,7 @@ blockquote {
 }
 
 .labelAgregar {
-    min-width: 120px;
+    min-width: 110px;
 }
 
 .select, .inputLindo{
@@ -1386,7 +1386,7 @@ blockquote {
     margin: 0;
     outline: 0;
     padding: 10px;
-    width: 50%;
+    width: 60%;
     color: #8a97a0;
     margin-bottom: 15px;
     border-width: 1px;
@@ -1395,6 +1395,32 @@ blockquote {
     border-image: initial;
 }
 
+.ingredienteCantidad {
+    width: 9%;
+}
+
+.ingredienteCantidadFilaNo0 {
+    margin-left:114px;
+    margin-right: 2px;
+}
+
+.ingredienteUnidadFilaNo0 {
+    margin-left:2px;
+    margin-right:2px;
+}
+
+.ingredienteNombreFilaNo0 {
+    margin-left:2px;
+    margin-right:2px;
+}
+
+.ingredienteUnidad {
+    width: 15%;
+}
+
+.ingredienteNombre {
+    width: 35%;
+}
 .input-filtro{
     font: inherit;
     border: 0;
@@ -1404,3 +1430,6 @@ blockquote {
     padding: 12px 20px;
 }
 
+td, th {
+    padding-right: 15px;
+}
