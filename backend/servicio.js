@@ -85,14 +85,7 @@ exports.obtenerReceta = async (idReceta) => {
 
 exports.obtenerComentarios = async (idReceta) => {
     var receta = await this.obtenerReceta(datos.idReceta); 
-    
-    return Comentarios.findAll({ where: { recetumId: idReceta } })
-        .then(data => {
-            return data;
-        })
-        .catch(err => {
-            throw err;
-        });
+    return receta.getComentarios();
 };
 
 exports.eliminarReceta = async (idReceta) => {
