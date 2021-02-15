@@ -25,7 +25,8 @@ exports.guardar = async (datos) => {
         console.log(err);
     }
     delete datos.rutaImagen;
-    var ingredientes = datos.ingredientes
+    var ingredientes = datos.ingredientes;
+    console.log("ingredientes: ", ingredientes)
     delete datos.ingredientes;
 
     var receta = await Receta.create(datos)
@@ -33,6 +34,7 @@ exports.guardar = async (datos) => {
             throw e;
         });
     for (const i in ingredientes) {
+        console.log("creando ingrediente: ", ingredientes[i])
         await receta.createIngrediente(ingredientes[i])
     }
     return receta
@@ -63,7 +65,6 @@ exports.guardarComentario = async (datos) => {
 exports.obtenerTodas = () => {
     return Receta.findAll({include: [{ model: Ingredientes }] })
         .then(data => {
-            console.log("data: ", data);
             return data;
         }).catch(err => {
             throw err;
