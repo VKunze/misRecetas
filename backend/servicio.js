@@ -84,7 +84,7 @@ exports.obtenerReceta = async (idReceta) => {
 };
 
 exports.obtenerComentarios = async (idReceta) => {
-    var receta = await this.obtenerReceta(datos.idReceta); 
+    var receta = await this.obtenerReceta(idReceta); 
     return receta.getComentarios();
 };
 
