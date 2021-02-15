@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       cantidad: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       unidadDeMedida: {
           type: Sequelize.STRING
