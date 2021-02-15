@@ -43,7 +43,7 @@ exports.guardar = async (datos) => {
  * 
  * @param {dictionary}  datos   Ejemplo: 
  *                              {
- *                                  nombreReceta: receta1,
+ *                                  idReceta: receta1,
  *                                  comentario: {
  *                                      contenido: contenido,
  *                                      autor: autor
@@ -51,7 +51,7 @@ exports.guardar = async (datos) => {
  *                              }
  */
 exports.guardarComentario = async (datos) => {
-    var receta = await this.obtenerReceta(datos.nombreReceta); 
+    var receta = await this.obtenerReceta(datos.idReceta); 
     return receta.createComentario(datos.comentario)
         .then(data => {
             return data;
@@ -70,8 +70,8 @@ exports.obtenerTodas = () => {
         });
 }
 
-exports.obtenerReceta = async (nombreReceta) => {
-    return Receta.findOne({ where: { nombre: nombreReceta }, include: [{ model: Comentarios }, { model: Ingredientes }] })
+exports.obtenerReceta = async (idReceta) => {
+    return Receta.findOne({ where: { id: idReceta }, include: [{ model: Comentarios }, { model: Ingredientes }] })
         .then(data => {
             data["comentarios"] = data.getComentarios();
             data["ingredientes"] = data.getIngredientes();
@@ -84,6 +84,8 @@ exports.obtenerReceta = async (nombreReceta) => {
 };
 
 exports.obtenerComentarios = async (idReceta) => {
+    var receta = await this.obtenerReceta(datos.idReceta); 
+    
     return Comentarios.findAll({ where: { recetumId: idReceta } })
         .then(data => {
             return data;
@@ -93,8 +95,8 @@ exports.obtenerComentarios = async (idReceta) => {
         });
 };
 
-exports.eliminarReceta = async (nombreReceta) => {
-    return Receta.destroy({ where: { nombre: nombreReceta }, include: [{ model: Comentarios }] })
+exports.eliminarReceta = async (idReceta) => {
+    return Receta.destroy({ where: { id: idReceta }, include: [{ model: Comentarios }] })
         .then(data => {
             return data;
         })

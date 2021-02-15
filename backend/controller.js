@@ -65,8 +65,8 @@ exports.obtenerComentarios = async (req, res) => {
 exports.obtenerRecetaEspecifica = async (req, res) => {
     try {
         console.log(req.body);
-        const nombreReceta = req.body.nombreReceta;
-        const respuesta = await servicio.obtenerReceta(nombreReceta);
+        const idReceta = req.body.idReceta;
+        const respuesta = await servicio.obtenerReceta(idReceta);
         res.status(200).send({
             success: true,
             datos: respuesta
@@ -82,8 +82,8 @@ exports.obtenerRecetaEspecifica = async (req, res) => {
 
 exports.eliminarReceta = async (req, res) => {
     try {
-        const nombreReceta = req.body.nombreReceta;
-        const respuesta = await servicio.eliminarReceta(nombreReceta);
+        const idReceta = req.body.idReceta;
+        const respuesta = await servicio.eliminarReceta(idReceta);
         res.status(200).send({
             success: true,
             datos: respuesta
