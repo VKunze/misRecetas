@@ -33,7 +33,6 @@ exports.guardarNuevaReceta = () => {
         ingrediente.nombre = ingredientesIngresados[i].querySelector(".ingredienteNombre").value;
         datos.ingredientes.push(ingrediente);
     }
-    console.log("datos que se van a guardar: ", datos, JSON.stringify(datos))
     backend.guardarReceta(datos);
     vistaTransiciones.irAPagPrincipal();
     this.listarRecetas();
@@ -42,7 +41,7 @@ exports.guardarNuevaReceta = () => {
 exports.mostrarAgregarIngrediente = (idPrevio) => {
     var id = Number(idPrevio) + 1;
     var outerDiv = utils.crearDiv("ingredienteNuevaReceta" + id, ["ingredienteIngresado"], "")
-    var inputCantidad = utils.crearInputNumero("ingredientesNuevaReceta" + id + "cantidad", ["inputLindo", "ingredienteCantidad", "ingredienteCantidadFilaNo0"], true, { "placeholder": "cantidad" })
+    var inputCantidad = utils.crearInput("ingredientesNuevaReceta" + id + "cantidad", ["inputLindo", "ingredienteCantidad", "ingredienteCantidadFilaNo0"], true, { "placeholder": "cantidad" })
     var inputUnidad = utils.crearInput("ingredientesNuevaReceta" + id + "unidad", ["inputLindo", "ingredienteUnidad", "ingredienteUnidadFilaNo0"], true, { "placeholder": "unidad" })
     var inputNombre = utils.crearInput("ingredientesNuevaReceta" + id + "ingrediente", ["inputLindo", "ingredienteNombre", "ingredienteNombreFilaNo0"], true, { "placeholder": "ingrediente" })
     var spanAgregarMas = utils.crearSpan("masIngredientes" + id)
@@ -66,41 +65,43 @@ exports.agregarImagen = () => {
 var readUrl = (input) => {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
+        var alreadyResized = true;
 
         reader.addEventListener("load", function (e) {
-            console.log(e.target, e.target.result)
             var img = document.getElementById("previewImagen");
             img.src = e.target.result;
+            alreadyResized = false;
         })
 
-        document.getElementById("previewImagen").addEventListener("load", function(e){
-            var img = document.getElementById("previewImagen");
+        document.getElementById("previewImagen").addEventListener("load", function (e) {
+            if (!alreadyResized) {
+                alreadyResized = true;
+                var img = document.getElementById("previewImagen");
 
-            // Resize img if too big
-            var MAX_WIDTH = 400;
-            var MAX_HEIGHT = 400;
-            var width = img.width;
-            var height = img.height;
-             if (width > height) {
-                 if (width > MAX_WIDTH) {
-                     height *= MAX_WIDTH / width;
-                     width = MAX_WIDTH;
-                 }
-             } else {
-                 if (height > MAX_HEIGHT) {
-                     width *= MAX_HEIGHT / height;
-                     height = MAX_HEIGHT;
-                 }
-             }
-            var canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            canvas.getContext('2d').drawImage(img, 0, 0, width, height)
-            var dataUrl = canvas.toDataURL("image/jpeg")
-            img.src = dataUrl;
+                // Resize img if too big
+                var MAX_WIDTH = 400;
+                var MAX_HEIGHT = 400;
+                var width = img.width;
+                var height = img.height;
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                var canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext('2d').drawImage(img, 0, 0, width, height)
+                var dataUrl = canvas.toDataURL("image/jpeg")
+                img.src = dataUrl;
+            }
         }, false);
-
-        console.log("input.files[0]", input.files[0])
         reader.readAsDataURL(input.files[0])
     }
 }
