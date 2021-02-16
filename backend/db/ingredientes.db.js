@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     cantidad: {
-      type: DataTypes.DOUBLE
+      type: DataTypes.STRING
     },
     unidadDeMedida: {
       type: Sequelize.STRING
