@@ -27,7 +27,7 @@ app.set('view engine', 'jade');
   app.use(express.errorHandler());
 } */
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({alter: true}).then(() => {
   app.use(ruter);
   http.createServer(app).listen(app.get('port'), () => {
     console.log('Express server listening on port ' + app.get('port'));
