@@ -30,10 +30,11 @@ function mandarABackend(tipoRequest, uri, params, returnValue = false) {
         Http.setRequestHeader("cache", "false");
         Http.setRequestHeader("processData", "false");
     }
-
+    console.log("params", params);
     Http.send(params);
 
     if (returnValue) {
+        console.log(Http.responseText);
         return JSON.parse(Http.responseText);
     } else {
         return "OK";
